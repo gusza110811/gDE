@@ -28,8 +28,8 @@ To install i3-restore, run `git clone https://github.com/jdholtz/i3-restore.git 
 To install clipcat see [its installation instruction](https://github.com/xrelkd/clipcat/blob/develop/docs/INSTALL.md)
 
 ## 1. Installation
-Copy the configs in directory `i3`, `i3status`, `picom` and `rofi` to their expected config path.
-* For example `~/.config/i3/`, `~/.config/i3status/`, `~/.config/picom/` and `~/.config/rofi/`
+Copy the configs in directory `i3`, `i3status`, `clipcat`, `picom` and `rofi` to their expected config path.
+* For example `~/.config/i3/`, `~/.config/i3status/`, `~/.config/clipcat`, `~/.config/picom/` and `~/.config/rofi/`
 
 Copy scripts in `scripts` to `~/scripts`
 
