@@ -1,0 +1,26 @@
+#!/bin/bash
+
+~/i3-restore/i3-save
+
+choice=$(printf "Logout\nReboot\nShutdown" | rofi -dmenu -i -p "Power" $@)
+
+if [[ $? == "1" ]]; then
+    exit 1
+fi
+
+if ~/scripts/confirm; then
+    exit
+fi
+
+case "$choice" in
+    Logout)
+        i3-msg exit
+        ;;
+    Reboot)
+        systemctl reboot
+        ;;
+    Shutdown)
+        systemctl poweroff
+        ;;
+esac
+

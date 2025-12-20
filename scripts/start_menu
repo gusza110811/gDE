@@ -1,0 +1,27 @@
+#!/bin/bash
+
+menu_items=$(cat ~/scripts/.start_list)
+prompt=$(printf "%s\nApplications\nPower\n" "$menu_items")
+
+choice=$(printf "%s\n" "$prompt" | rofi -dmenu -i -p "Start" -location 7 -replace)
+
+if [[ $? != 0 ]]; then
+    exit $?
+fi
+
+case "$choice" in
+    Applications)
+        rofi -modi drun -show drun -location 7 -show-icons
+        ;;
+    Power)
+        ~/scripts/shutdown_menu -location 7
+        if [[ $? == 1 ]]; then
+            exec $0
+        fi
+        ;;
+    *)
+        # split "Name|Command"
+        cmd="${choice#*|}"
+        [ "$cmd" != "$choice" ] && exec $SHELL -c "$cmd"
+        ;;
+esac

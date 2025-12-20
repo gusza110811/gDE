@@ -1,0 +1,5 @@
+#!/bin/sh
+
+confirm=$(printf "No\nYes" | rofi -dmenu -p "Are you sure?")
+[ "$confirm" != "Yes" ] && exit 0
+exit 1

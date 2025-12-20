@@ -1,0 +1,10 @@
+//@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+
+configuration {
+    font: "monospace 10";
+    cache-dir: "~/.rofi/cache";
+    pid: "~/.rofi/pid";
+    cycle: false;
+}
+
