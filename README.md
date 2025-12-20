@@ -1,3 +1,12 @@
+# gDE: Gusza's Desktop Environment
+An i3-based lightweight desktop environment (Only consumes about 0.5GiB - 0.7GiB of ram on idle!)
+
+# Features
+- Runs on i3 window manager
+- Rofi-based Navigation (start menu, app menu, power menu, etc)
+- Session restoration (via i3-restore)
+- Clipboard (via clipcat)
+
 # Requirements
 ```
 i3-wm
@@ -11,9 +20,11 @@ i3-restore (at ~/i3-restore)
 ---
 # Set up
 ## 0. Preinstallation
-Install the requirements listed above; for example, on Debian-based system: `sudo apt install i3-wm rofi feh picom alacritty clipcat`.
+Install the requirements listed above; for example, on Debian-based system: `sudo apt install i3-wm rofi feh picom alacritty`.
 
-For i3-restore, run `git clone https://github.com/jdholtz/i3-restore.git ~/i3-restore` and add `~/i3-restore` to PATH
+To install i3-restore, run `git clone https://github.com/jdholtz/i3-restore.git ~/i3-restore` and add `~/i3-restore` to PATH
+
+To install clipcat see [its installation instruction](https://github.com/xrelkd/clipcat/blob/develop/docs/INSTALL.md)
 
 ## 1. Installation
 Copy the configs in directory `i3`, `i3status`, `picom` and `rofi` to their expected config path.
