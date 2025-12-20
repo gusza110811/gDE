@@ -18,6 +18,7 @@ clipcat
 i3-restore (at ~/i3-restore)
 ```
 ---
+
 # Set up
 ## 0. Preinstallation
 Install the requirements listed above; for example, on Debian-based system: `sudo apt install i3-wm rofi feh picom alacritty`.
@@ -43,6 +44,7 @@ Firefox | firefox
 Neovim | alacritty -e nvim
 ```
 The Start Menu will show both the name and the command
+
 ---
 # Keybinds (modified from default i3 keybinds)
 | keybind | usage |
