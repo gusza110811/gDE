@@ -3,8 +3,8 @@
 
 configuration {
     font: "monospace 10";
-    cache-dir: "~/.rofi/cache";
-    pid: "~/.rofi/pid";
+    cache-dir: "/home/gusza/.rofi/cache";
+    pid: "/home/gusza/.rofi/pid";
     cycle: false;
 }
 

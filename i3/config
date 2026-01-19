@@ -32,10 +32,14 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# brightnessctl
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
 # THEME CONFIG
 set $bg          #2b2b2b
@@ -53,30 +57,31 @@ default_floating_border pixel 4
 floating_minimum_size 75 x 50
 floating_maximum_size 1200 x 800
 
-# Make the currently focused window a scratchpad
-bindsym $mod+Shift+h move scratchpad
-
-# Show the first scratchpad window
-bindsym $mod+Shift+s scratchpad show
-
 # autostart compositor
-exec --no-startup-id picom
+exec --no-startup-id "exec picom"
+
+# restart compositor
+bindsym $mod+Shift+Escape exec --no-startup-id "killall picom; exec picom"
 
 # clipboard manager
-exec_always --no-startup-id clipcatd
+exec "exec clipcatd"
 bindsym $mod+v exec clipcat-menu
 
-# solid wallpaper
-exec --no-startup-id feh ~/images/black.png --bg-tile
+# wallpaper
+exec_always --no-startup-id feh ~/bg/teto.webp --bg-scale
 
 # notification
-exec --no-startup-id dunst
+exec --no-startup-id "exec dunst"
+bindsym $mod+Shift+n exec "dunstctl history-pop"
+bindsym $mod+n exec "dunstctl close"
+bindsym $mod+Control+n exec "dunstctl close-all"
+
 
 # restore session
 exec --no-startup-id ~/i3-restore/i3-restore
 
 # screenshot
-exec --no-startup-id flameshot
+bindsym $mod+Shift+s exec "maim -s | xclip -selection clipboard -t image/png"
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -86,9 +91,6 @@ bindsym $mod+Delete exec firefox
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
-# preload rofi cache
-exec_always --no-startup-id 'rofi -dump-config >/dev/null'
 
 # start menu
 bindcode 133 --release exec --no-startup-id /home/gusza/scripts/start_menu
@@ -103,25 +105,25 @@ bindsym $mod+r exec "rofi -modi run -show run"
 bindsym $mod+Tab exec "rofi -modi run -show window"
 
 # start file explorer
-bindsym $mod+Shift+F exec "thunar"
+bindsym $mod+Shift+F exec "nemo"
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+Left focus left; split v
+bindsym $mod+Down focus down; split v
+bindsym $mod+Up focus up; split h
+bindsym $mod+Right focus right; split h
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -215,16 +217,17 @@ mode "resize" {
 
 bindsym $mod+Control+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-    status_command i3status
+exec_always --no-startup-id "~/.polybar_run"
 
-    colors  {
-        background #111111
-    }
-}
+bindsym $mod+z exec "polybar-msg cmd show"
+bindsym $mod+z --release exec "polybar-msg cmd hide"
 
 # floating by default
-for_window [class="Thunar"] floating enable
+for_window [class="Nemo"] floating enable
 for_window [class="feh"] floating enable
+for_window [class="Code" instance="code"] floating enable
+
+exec --no-startup-id "dunstify gDE 'Welcome to gDE'"
+
+exec_always "polybar-msg cmd hide"
+
